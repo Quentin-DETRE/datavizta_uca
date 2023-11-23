@@ -1,9 +1,9 @@
 <script lang="ts">
-    import BarChart from "$lib/impact/server-cloud/HorizBarChart.svelte";
-    import type { VerboseServerImpacts } from "$lib/types/impact";
+    import BarChart from "$lib/impact/iot/HorizBarChart.svelte";
+    import type { VerboseIotImpacts } from "$lib/types/impact";
     import { _ } from "svelte-i18n";
 
-    export let verboseImpacts: VerboseServerImpacts;
+    export let verboseImpacts: VerboseIotImpacts;
 </script>
 
 {#await verboseImpacts}
@@ -19,16 +19,9 @@
         </div>
         <div class="px-1 w-full">
             <BarChart
-                result={loadedImpact.pe}
-                criteria={$_("impacts.PE")}
-                description={$_("impacts.PE desc")}
-            />
-        </div>
-        <div class="px-1 w-full">
-            <BarChart
-                result={loadedImpact.adp}
-                criteria={$_("impacts.ADP")}
-                description={$_("impacts.ADP desc")}
+                result={loadedImpact.adpe}
+                criteria={$_("impacts.ADPE")}
+                description={$_("impacts.ADPE desc")}
             />
         </div>
     {/if}

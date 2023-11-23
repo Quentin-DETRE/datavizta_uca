@@ -1,6 +1,3 @@
-import type { List } from "postcss/lib/list";
-import { number } from "svelte-i18n";
-
 export interface Server {
   model: ModelServer;
   config: ConfigurationServer;
@@ -23,6 +20,11 @@ export interface UserDevice {
   archetype: string;
   usage: UsageRequest;
 }
+export interface IoT {
+  archetype: string;
+  functional_blocks: Array<Archetype>;
+  usage: UsageRequest;
+}
 
 export interface UsageRequest {
   hash?: string;
@@ -35,7 +37,7 @@ export interface UsageRequest {
   gwp_factor?: number;
   pe_factor?: number;
   adp_factor?: number;
-  time_workload?: Array<TimeWorkload>
+  time_workload?: Array<TimeWorkload>;
 }
 export interface Usage {
   hash?: string;
@@ -43,36 +45,36 @@ export interface Usage {
   use_time?: {
     default?: number;
     value?: number;
-  }
+  };
   years_life_time?: {
     default?: number;
     value?: number;
-  }
+  };
   use_time_ratio?: {
-      value: number,
-      status?: string,
-      unit?: string,
-      min?: number,
-      max?: number,
-      hours_per_day?: number
-  }
+    value: number;
+    status?: string;
+    unit?: string;
+    min?: number;
+    max?: number;
+    hours_per_day?: number;
+  };
   avg_power?: {
     default?: number;
     value?: number;
     min?: number;
     max?: number;
-  }
+  };
   extendLifetime?: {
     value: number;
-  }
+  };
   usage_location?: {
     value: string;
     label: string;
-  }
+  };
   gwp_factor?: number;
   pe_factor?: number;
   adp_factor?: number;
-  time_workload?: Array<TimeWorkload>
+  time_workload?: Array<TimeWorkload>;
 }
 
 export interface TimeWorkload {
@@ -134,4 +136,9 @@ export interface Ram {
   manufacture_date?: string;
   model?: string;
   integrator?: string;
+}
+
+export interface Archetype {
+  type: string;
+  hsl_level: string;
 }

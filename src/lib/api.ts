@@ -1,10 +1,10 @@
-import type { Cloud, Server, UserDevice } from "./types/hardware";
+import type { Cloud, IoT, Server, UserDevice } from "./types/hardware";
 import type { Impacts } from "./types/impact";
-let base
+let base;
 if (import.meta.env.VITE_PUBLIC_API_URL) {
-  base = import.meta.env.VITE_PUBLIC_API_URL
+  base = import.meta.env.VITE_PUBLIC_API_URL;
 } else {
-  base = "https://api.boavizta.org/v1"
+  base = "https://api.boavizta.org/v1";
 }
 
 async function send(method: string, path: string, data: unknown = undefined) {
@@ -49,13 +49,40 @@ export async function getCloudImpact(instance: Cloud): Promise<Impacts> {
   });
 }
 
-export async function getUserDeviceImpact(device: UserDevice, yearly: Boolean = false): Promise<Impacts> {
-  let res
+export async function getUserDeviceImpact(
+  device: UserDevice,
+  yearly: Boolean = false
+): Promise<Impacts> {
+  let res;
   if (yearly) {
-    res = await post(device.category + "/" + device.subcategory + "?criteria=gwp&criteria=ir&criteria=pe&criteria=adpe&criteria=odp&criteria=ap&criteria=ept" + "&duration=8760&archetype=" + device.archetype, device);
+    res = await post(
+      device.category +
+        "/" +
+        device.subcategory +
+        "?criteria=gwp&criteria=ir&criteria=pe&criteria=adpe&criteria=odp&criteria=ap&criteria=ept" +
+        "&duration=8760&archetype=" +
+        device.archetype,
+      device
+    );
   } else {
-    res = await post(device.category + "/" + device.subcategory + "?criteria=gwp&criteria=ir&criteria=pe&criteria=adpe&criteria=odp&criteria=ap&criteria=ept" + "&archetype=" + device.archetype, device);
+    res = await post(
+      device.category +
+        "/" +
+        device.subcategory +
+        "?criteria=gwp&criteria=ir&criteria=pe&criteria=adpe&criteria=odp&criteria=ap&criteria=ept" +
+        "&archetype=" +
+        device.archetype,
+      device
+    );
   }
+  return res.text().then((json) => {
+    return JSON.parse(json);
+  });
+}
+
+export async function getIotImpact(instance: IoT): Promise<Impacts> {
+  const params = `?archetype=${instance.archetype}&verbose=true&duration=8760&criteria=gwp&criteria=adpe`;
+  const res = await post("iot/iot_device" + params, instance);
   return res.text().then((json) => {
     return JSON.parse(json);
   });

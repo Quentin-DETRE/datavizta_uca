@@ -1,7 +1,5 @@
-
-
 export type Impacts = {
-  impacts:{
+  impacts: {
     gwp: {
       description: string;
       embedded: ImpactValue;
@@ -50,35 +48,67 @@ export type Impacts = {
       use: ImpactValue;
       unit: string;
     };
-  }
-}
+  };
+};
 type ImpactValue = {
-  value: number,
-  significant_figures: number,
-  min: number,
-  max: number,
-  warnings: [],
-}
+  value: number;
+  significant_figures: number;
+  min: number;
+  max: number;
+  warnings: [];
+};
 
 export type VerboseServerImpact = {
-  assembly: number, power_supply: number, ssd: number, total: number, motherboard: number, hdd: number, cpu: number, ram: number, case: number}
+  assembly: number;
+  power_supply: number;
+  ssd: number;
+  total: number;
+  motherboard: number;
+  hdd: number;
+  cpu: number;
+  ram: number;
+  case: number;
+};
+
+export type VerboseIotImpact = {
+  assembly: number;
+  power_supply: number;
+  ssd: number;
+  total: number;
+  motherboard: number;
+  hdd: number;
+  cpu: number;
+  ram: number;
+  case: number;
+};
 
 export type CriteriaServerImpact = {
   description: string;
-  embedded : VerboseServerImpact,
-  use: VerboseServerImpact,
-  unit: string
+  embedded: VerboseServerImpact;
+  use: VerboseServerImpact;
+  unit: string;
 };
 
 export type CriteriaTerminalImpact = {
   description: string;
-  embedded : ImpactValue,
-  use: ImpactValue,
-  unit: string
+  embedded: ImpactValue;
+  use: ImpactValue;
+  unit: string;
+};
+export type CriteriaIotImpact = {
+  description: string;
+  embedded: VerboseIotImpacts;
+  use: VerboseIotImpacts;
+  unit: string;
 };
 
-export type VerboseServerImpacts = { 
-  gwp: CriteriaServerImpact,
-  pe: CriteriaServerImpact,
-  adpe: CriteriaServerImpact
-}
+export type VerboseServerImpacts = {
+  gwp: CriteriaServerImpact;
+  pe: CriteriaServerImpact;
+  adpe: CriteriaServerImpact;
+};
+
+export type VerboseIotImpacts = {
+  gwp: CriteriaIotImpact;
+  adpe: CriteriaIotImpact;
+};
